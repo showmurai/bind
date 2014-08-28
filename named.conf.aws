@@ -1,0 +1,64 @@
+// This is the primary configuration file for the BIND DNS server named.
+//
+// Please read /usr/share/doc/bind9/README.Debian.gz for information on the 
+// structure of BIND configuration files in Debian, *BEFORE* you customize 
+// this configuration file.
+//
+// If you are just adding zones, please do that in /etc/bind/named.conf.local
+
+include "/etc/bind/named.conf.options";
+include "/etc/bind/named.conf.local";
+include "/etc/bind/named.conf.default-zones";
+logging {
+    channel queries-log {
+        file "queries.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    channel "default_syslog" {
+        file "default.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    channel resolver-log {
+        file "resolver.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    channel client-log {
+        file "client.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    channel security-log {
+        file "severity.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    channel network-log {
+        file "network.log" versions 5 size 10M;
+        severity info;
+        print-time yes;
+        print-category yes;
+        print-severity yes;
+    };
+    category edns-disabled { null; };
+    category lame-servers { null; };
+    category resolver { resolver-log; };
+    category client { client-log; };
+    category queries { queries-log; };
+    category security { security-log; };
+    category network { network-log; };
+    category general { default_syslog; };
+};
+
